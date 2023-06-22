@@ -1,0 +1,6 @@
+-- finding length of ride_id
+SELECT 
+  LENGTH (ride_id) AS string_length
+FROM `inner-doodad-382022.Capstone1.cyclistic_data_union` 
+GROUP BY
+  string_length
