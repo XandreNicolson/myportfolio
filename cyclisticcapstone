@@ -4,3 +4,5 @@ SELECT
 FROM `inner-doodad-382022.Capstone1.cyclistic_data_union` 
 GROUP BY
   string_length
+** text is red **
+
