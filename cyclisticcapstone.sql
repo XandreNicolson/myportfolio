@@ -1,4 +1,4 @@
--- first we combined all 12 datasets
+-- Query 1: first we combined all 12 datasets
 
 SELECT  * FROM `inner-doodad-382022.Capstone1.Apr2023` 
 UNION ALL
@@ -30,7 +30,7 @@ SELECT * FROM `inner-doodad-382022.Capstone1.Sep2022`
   then proceed to clean column by column as planned.
 */
 
--- finding length of ride_id to ensure uniforminty 
+-- Query 2: finding length of ride_id to ensure uniforminty 
 SELECT 
   LENGTH (ride_id) AS string_length
 FROM `inner-doodad-382022.Capstone1.cyclistic_data_union` 
@@ -38,14 +38,14 @@ GROUP BY
   string_length
 ;
 
--- checked to see if there were any duplicates in ride_id
+-- Query 3: checked to see if there were any duplicates in ride_id
 SELECT 
   COUNT (ride_id) AS count_id,
   COUNT (DISTINCT ride_id) AS distinct_id
 FROM `inner-doodad-382022.Capstone1.cyclistic_data_union`
 ;
 
--- changed docked_bike to classic_bike as these referenced the same item
+-- Query 4: changed docked_bike to classic_bike as these referenced the same item
 UPDATE
  `inner-doodad-382022.Capstone1.cyclistic_data_union` 
 SET
@@ -54,7 +54,7 @@ WHERE
   rideable_type = 'docked_bike'
 ;
 
--- next we checked for null in the started_at/end_at column but found none
+-- Query 5: next we checked for null in the started_at/end_at column but found none
 UPDATE
  `inner-doodad-382022.Capstone1.cyclistic_data_union` 
 SET
@@ -63,13 +63,13 @@ WHERE
   rideable_type = 'docked_bike'
 ;
 
---then eliminated all rides under one minute (removed 140515 rows)
+-- Query 6: then eliminated all rides under one minute (removed 140515 rows)
 DELETE FROM `inner-doodad-382022.Capstone1.cyclistic_data_union`
 WHERE
  TIMESTAMP_DIFF(ended_at, started_at, MINUTE) < 1
 ;
 
---looked for null in start_station_name for classic_bikes but found none
+-- Query 7: looked for null in start_station_name for classic_bikes but found none
 SELECT 
   *
 FROM `inner-doodad-382022.Capstone1.cyclistic_data_union` 
@@ -79,7 +79,7 @@ WHERE
   start_station_name IS NULL
 ;
 
---elimnated nulls in end_station_name for classic_bikes (removed 6,069 rows)
+-- Query 8: elimnated nulls in end_station_name for classic_bikes (removed 6,069 rows)
 DELETE FROM `inner-doodad-382022.Capstone1.cyclistic_data_union`
 WHERE
   rideable_type = 'classic_bike'
@@ -87,7 +87,7 @@ WHERE
   end_station_name IS NULL
 ;
 
---checked consistent naming for start/end_station_name but no issues
+-- Query 9: checked consistent naming for start/end_station_name but no issues
 SELECT  
   COUNT (DISTINCT start_station_name) AS name,
   COUNT (DISTINCT TRIM (start_station_name)) AS trimmed_name,
@@ -99,7 +99,7 @@ SELECT
 FROM `inner-doodad-382022.Capstone1.cyclistic_data_union`
 ;
 
---removed station_id as it felt redundent
+-- Query 10: removed station_id as it felt redundent
 CREATE OR REPLACE TABLE `inner-doodad-382022.Capstone1.cyclistic_data_union` AS
 SELECT
  * EXCEPT (start_station_id, end_station_id) 
