@@ -159,7 +159,7 @@ SELECT
 FROM `inner-doodad-382022.Capstone1.cyclistic_data_time_columns`
 ;
 
--- Query 14a = created a separate table for top 50 stations used for each rider type
+-- Query 14 = created separate tables for the top 50 start & end stations used for each rider type
 SELECT  
   end_station_name,
   end_lat,
@@ -231,7 +231,5 @@ GROUP BY
 ORDER BY num_of_trip_start_station DESC
 LIMIT 50
 ;
-
--- Query 14b = after some further studying, we found that the above query was not effecient. Below is a different version using CTE expressions. 
 
 --data cleaning complete
