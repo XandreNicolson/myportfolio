@@ -106,7 +106,8 @@ SELECT
 FROM `inner-doodad-382022.Capstone1.cyclistic_data_union`  
 ;
 
-/* added columns for trip_duration, day, and month and saved 
+/* 
+  Query 11 = added columns for trip_duration, day, and month and saved 
   as a new table: cyclistic_data_time_columns
 */
 SELECT  
@@ -138,13 +139,13 @@ SELECT
 FROM `inner-doodad-382022.Capstone1.cyclistic_data_union`
 ;
 
--- removed any rides longer than a full day
+-- Query 12 = removed any rides longer than a full day
 DELETE FROM `inner-doodad-382022.Capstone1.cyclistic_data_time_columns` 
 WHERE
   trip_duration > 1440
 ;
 
---added a time_of_day column as an update to the table
+-- Query 13 = added a time_of_day column as an update to the table
 CREATE OR REPLACE TABLE `inner-doodad-382022.Capstone1.cyclistic_data_time_columns`AS
 SELECT  
   *,
@@ -158,7 +159,7 @@ SELECT
 FROM `inner-doodad-382022.Capstone1.cyclistic_data_time_columns`
 ;
 
--- created a separate table for top 50 stations used for each rider type
+-- Query 14a = created a separate table for top 50 stations used for each rider type
 SELECT  
   end_station_name,
   end_lat,
@@ -230,5 +231,7 @@ GROUP BY
 ORDER BY num_of_trip_start_station DESC
 LIMIT 50
 ;
+
+-- Query 14b = after some further studying, we found that the above query was not effecient. Below is a different version using CTE expressions. 
 
 --data cleaning complete
