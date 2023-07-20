@@ -2,12 +2,6 @@
 title: "Cyclistic Capstone"
 author: "Xandre"
 date: "2023-07-06"
-output:
-  html_document: default
-  pdf_document: default
-editor_options: 
-  markdown: 
-    wrap: 72
 ---
 
 ## Cyclistic Capstone
